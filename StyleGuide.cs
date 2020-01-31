@@ -55,7 +55,7 @@ namespace UD.Core
 
 		/// <summary>
 		/// Getter only property
-		///		Prefer labmdas over { get { return "example"; } } where sensible
+		///		Prefer lambdas over { get { return "example"; } } where sensible
 		/// </summary>
 		string getter => "example;";
 
@@ -64,8 +64,7 @@ namespace UD.Core
 		///		Next in class after public members
 		/// </summary>
 		public void StyleGuide()
-		{
-			
+		{		
 		}
 
 		/// <summary>
@@ -130,7 +129,7 @@ namespace UD.Core
 
 			var listOfWords = new[] { "one", "two", "three" };
 
-			// Keep "LINQ" lambas legible with clear formatting
+			// Keep "LINQ" lambdas legible with clear formatting
 			listOfWords
 				.Where(item => item.Length <= 3)
 				.Select(item => item[0])
@@ -202,5 +201,31 @@ namespace UD.Core
 			public string ReturnValue1 { get; set; }
 			public int ReturnValue2 { get; set; }
 		}
+	}
+	
+	/// <summary>
+	/// Enums
+	/// </summary>
+	enum MyOptions
+	{
+		// Prefer to specify the first value as explicitly non-zero, so you can tell the difference 
+		// from default(MyOptions), unless it truly makes sense to have a default / "null" value
+		OptionA = 1,
+		OptionB = 2,
+		OptionC = 3
+	}
+	
+	// Specify [Flags] when you're intending to use the enum as a flag set
+	[Flags]
+	enum FlagOptions
+	{
+		// powers of two for the canonical values
+		OptionA = 1,
+		OptionB = 2,
+		OptionC = 4,
+		
+		// specify combinations only if they have semantic value on their own
+		// don't calculate their value manually
+		StandardOptions = OptionB | OptionC
 	}
 }
